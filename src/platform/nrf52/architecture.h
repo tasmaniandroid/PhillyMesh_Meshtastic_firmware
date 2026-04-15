@@ -157,6 +157,14 @@
 
 #endif
 
+#ifdef _PHILLYMESH_MICRONODE_H_
+
+// This board uses 0 to be mean LED on
+#undef LED_STATE_ON
+#define LED_STATE_ON 0 // State when LED is lit
+
+#endif
+
 #if defined(PIN_LED1) && !defined(LED_POWER)
 #define LED_POWER PIN_LED1 // LED1 on nrf52840-DK
 #endif
