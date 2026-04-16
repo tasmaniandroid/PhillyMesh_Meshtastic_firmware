@@ -532,7 +532,14 @@ class AnalogBatteryLevel : public HasBatteryLevel
 
     /// For heltecs with no battery connected, the measured voltage is 2204, so
     // need to be higher than that, in this case is 2500mV (3000-500)
-    const uint16_t OCV[NUM_OCV_POINTS] = {OCV_ARRAY};
+    const uint16_t OCV_LIPO[NUM_OCV_POINTS] = {OCV_ARRAY};
+    const uint16_t OCV_LIFEPO4[NUM_OCV_POINTS] = {LIFEPO4_OCV_ARRAY};
+#if defined(LIFEPO4_CELL)
+    const uint16_t* OCV = OCV_LIFEPO4;
+#else
+    const uint16_t* OCV = OCV_LIPO;
+#endif // defined(LIFEPO4_CELL)
+
     const float chargingVolt = (OCV[0] + 10) * NUM_CELLS;
     const float noBatVolt = (OCV[NUM_OCV_POINTS - 1] - 500) * NUM_CELLS;
     // Start value from minimum voltage for the filter to not start from 0
