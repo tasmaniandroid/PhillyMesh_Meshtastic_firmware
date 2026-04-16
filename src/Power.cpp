@@ -336,11 +336,23 @@ class AnalogBatteryLevel : public HasBatteryLevel
 #ifdef ARCH_NRF52
             concurrency::LockGuard saadcGuard(concurrency::nrf52SaadcLock);
 #endif
+#if BATTERY_PIN != -1 // Skip if pin not used
             for (uint32_t i = 0; i < BATTERY_SENSE_SAMPLES; i++) {
                 raw += analogRead(BATTERY_PIN);
             }
             raw = raw / BATTERY_SENSE_SAMPLES;
             scaled = operativeAdcMultiplier * ((1000 * AREF_VOLTAGE) / pow(2, BATTERY_SENSE_RESOLUTION_BITS)) * raw;
+#endif
+#if defined(USE_VDDHDIV5) and defined(ARCH_NRF52)
+            if (scaled <
+                1000) { // Battery pin not used or not connected to voltage divider, fallback to reading voltage of VDDH pin
+                for (uint32_t i = 0; i < BATTERY_SENSE_SAMPLES; i++) {
+                    raw += analogReadVDDHDIV5();
+                }
+                raw = raw / BATTERY_SENSE_SAMPLES;
+                scaled = 5 * ((1000 * AREF_VOLTAGE) / pow(2, BATTERY_SENSE_RESOLUTION_BITS)) * raw;
+            }
+#endif
 #endif
             battery_adcDisable();
 
