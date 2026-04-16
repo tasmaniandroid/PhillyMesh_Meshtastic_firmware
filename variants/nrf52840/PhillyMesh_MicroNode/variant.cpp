@@ -93,4 +93,9 @@ void initVariant()
 
     pinMode(PIN_LED3, OUTPUT);
     ledOff(PIN_LED3);
+#if defined(USE_VDDHDIV5)
+    pinMode(VBAT_ENABLE, OUTPUT);
+    digitalWrite(VBAT_ENABLE, HIGH);
+#endif
+
 }
