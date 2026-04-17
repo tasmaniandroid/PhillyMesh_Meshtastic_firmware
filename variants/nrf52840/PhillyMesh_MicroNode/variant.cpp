@@ -27,27 +27,27 @@ const uint32_t g_ADigitalPinMap[] = {
     30, // D13 is P0.30 (LED GREEN)
     14, // D14 is P0.14 (READ_BAT)
 
-    // LSM6DS3TR
-    40, // D15 is P1.08 (6D_PWR)
-    27, // D16 is P0.27 (6D_I2C_SCL)
-    7,  // D17 is P0.07 (6D_I2C_SDA)
-    11, // D18 is P0.11 (6D_INT1)
+    // MISC
+    40, // D15 is P1.08 UNUSED
+    27, // D16 is P0.27 (OVERCURRENT)
+    7,  // D17 is P0.07 UNUSED
+    11, // D18 is P0.11 UNUSED
 
     // MIC
     42, // D19 is P1.10 (MIC_PWR)
     32, // D20 is P1.00 (PDM_CLK)
     16, // D21 is P0.16 (PDM_DATA)
 
-    // BQ25100
+    // BQ25176J
     13, // D22 is P0.13 (HICHG)
     17, // D23 is P0.17 (~CHG)
 
     //
     21, // D24 is P0.21 (QSPI_SCK)
     25, // D25 is P0.25 (QSPI_CSN)
-    20, // D26 is P0.20 (QSPI_SIO_0 DI)
+    20, // D26 is P0.20 (QSPI_SIO_0 DI) or (NMOS_2)
     24, // D27 is P0.24 (QSPI_SIO_1 DO)
-    22, // D28 is P0.22 (QSPI_SIO_2 WP) or (NMOS_2)
+    22, // D28 is P0.22 (QSPI_SIO_2 WP)
     23, // D29 is P0.23 (QSPI_SIO_3 HOLD)
 
     // NFC
@@ -57,8 +57,10 @@ const uint32_t g_ADigitalPinMap[] = {
     // VBAT
     31, // D32 is P0.31 (VBAT)
     
-    // Additional High Current Outputs
+    // Additional High Current Outputs, other monitoring
     19, // D33 is P0.19 (NMOS_1)
+    41, // D34 is P1.10 (CHARGE_SRC)
+    43, // D35 is P1.10 (PWR_GOOD)
 };
 
 /*

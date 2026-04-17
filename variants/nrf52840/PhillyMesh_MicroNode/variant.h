@@ -48,8 +48,8 @@ Note that the in addition to the difference between the default and the I2C pino
 D6/D7, the user button is activated on D0. The button conflicts with the official GNSS module, so caution is advised.
 */
 
-#define PINS_COUNT (34)
-#define NUM_DIGITAL_PINS (34)
+#define PINS_COUNT (36)
+#define NUM_DIGITAL_PINS (36)
 #define NUM_ANALOG_INPUTS (8)
 #define NUM_ANALOG_OUTPUTS (0)
 
@@ -196,7 +196,7 @@ static const uint8_t SCK = PIN_SPI_SCK;
  * Battery
  */
 #define USE_VDDHDIV5              // Use internal VDDHDIV5 for battery voltage read (post e-fuse)
-
+//#define LIFEPO4_CELL
 #if defined(USE_VDDHDIV5)
 #define BATTERY_PIN -1           // Disable battery pin to allow VDDHDIV5
 #else
@@ -209,10 +209,14 @@ static const uint8_t SCK = PIN_SPI_SCK;
 #endif
 
 #define EXT_CHRG_DETECT (23)      // P0.17: Charge LED
-#define EXT_CHRG_DETECT_VALUE LOW // ... BQ25101 ~CHG indicates charging
-#define HICHG (22)                // P0.13: BQ25101 ISET 100mA instead of 50mA
-
+#define EXT_CHRG_DETECT_VALUE LOW // ... BQ25176J ~CHG indicates charging
+#define PWR_GOOD (35)             // BQ25176J PG indicator
+#define HICHG (22)                // P0.13: BQ25176J ISET 800mA instead of 200mA
+#define CHARGE_SRC (34)           // Charging source from TPS2120
 #define BATTERY_SENSE_RESOLUTION_BITS (10)
+
+
+
 
 /*
  * Wire Interfaces
@@ -230,13 +234,10 @@ static const uint8_t SCK = PIN_SPI_SCK;
  * High Current Outputs
  */
 
-#define NMOS_1 28 // High current sinking FET output, 5.5A 20V rated
-#define NMOS_2 33 // High current sinking FET output, 5.5A 20V rated
+#define NMOS_1 33 // High current sinking FET output, 5.5A 20V rated
+#define NMOS_2 26 // High current sinking FET output, 5.5A 20V rated
+#define OVERCURRENT 16 // eFuse current limit output 
 
-// // Internal LSM6DS3TR on XIAO nRF52840 Series - put it on wire1
-// // Note: disabled for now, as there are some issues with the LSM.
-// #define PIN_WIRE1_SDA (17)
-// #define PIN_WIRE1_SCL (16)
 
 static const uint8_t SDA = PIN_WIRE_SDA; // Not sure if this is needed
 static const uint8_t SCL = PIN_WIRE_SCL; // Not sure if this is needed
