@@ -198,7 +198,7 @@ static const uint8_t SCK = PIN_SPI_SCK;
 #define USE_VDDHDIV5              // Use internal VDDHDIV5 for battery voltage read (post e-fuse)
 
 #if defined(USE_VDDHDIV5)
-#define BATTERY_PIN_ -1           // Disable battery pin to allow VDDHDIV5
+#define BATTERY_PIN -1           // Disable battery pin to allow VDDHDIV5
 #else
 
 #define BATTERY_PIN PIN_VBAT      // P0.31: VBAT voltage divider
