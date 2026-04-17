@@ -55,7 +55,7 @@ const uint32_t g_ADigitalPinMap[] = {
     10, // D31 is P0.10 (NFC2)
 
     // VBAT
-    31, // D32 is P0.10 (VBAT)
+    31, // D32 is P0.31 (VBAT)
 };
 
 /*
