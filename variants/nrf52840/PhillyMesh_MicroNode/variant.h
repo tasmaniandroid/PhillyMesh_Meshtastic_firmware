@@ -48,8 +48,8 @@ Note that the in addition to the difference between the default and the I2C pino
 D6/D7, the user button is activated on D0. The button conflicts with the official GNSS module, so caution is advised.
 */
 
-#define PINS_COUNT (33)
-#define NUM_DIGITAL_PINS (33)
+#define PINS_COUNT (34)
+#define NUM_DIGITAL_PINS (34)
 #define NUM_ANALOG_INPUTS (8)
 #define NUM_ANALOG_OUTPUTS (0)
 
@@ -226,7 +226,12 @@ static const uint8_t SCK = PIN_SPI_SCK;
 #define PIN_WIRE_SDA 30
 #define PIN_WIRE_SCL 31
 
+/*
+ * High Current Outputs
+ */
 
+#define NMOS_1 28 // High current sinking FET output, 5.5A 20V rated
+#define NMOS_2 33 // High current sinking FET output, 5.5A 20V rated
 
 // // Internal LSM6DS3TR on XIAO nRF52840 Series - put it on wire1
 // // Note: disabled for now, as there are some issues with the LSM.

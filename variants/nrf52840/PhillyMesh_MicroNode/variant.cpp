@@ -47,7 +47,7 @@ const uint32_t g_ADigitalPinMap[] = {
     25, // D25 is P0.25 (QSPI_CSN)
     20, // D26 is P0.20 (QSPI_SIO_0 DI)
     24, // D27 is P0.24 (QSPI_SIO_1 DO)
-    22, // D28 is P0.22 (QSPI_SIO_2 WP)
+    22, // D28 is P0.22 (QSPI_SIO_2 WP) or (NMOS_2)
     23, // D29 is P0.23 (QSPI_SIO_3 HOLD)
 
     // NFC
@@ -56,6 +56,9 @@ const uint32_t g_ADigitalPinMap[] = {
 
     // VBAT
     31, // D32 is P0.31 (VBAT)
+    
+    // Additional High Current Outputs
+    19, // D33 is P0.19 (NMOS_1)
 };
 
 /*
@@ -93,9 +96,18 @@ void initVariant()
 
     pinMode(PIN_LED3, OUTPUT);
     ledOff(PIN_LED3);
+    
 #if defined(USE_VDDHDIV5)
     pinMode(VBAT_ENABLE, OUTPUT);
     digitalWrite(VBAT_ENABLE, HIGH);
 #endif
+
+    // High Current Outputs
+    pinMode(NMOS_1, OUTPUT);
+    digitalWrite(NMOS_1, LOW);
+
+    pinMode(NMOS_2, OUTPUT);
+    digitalWrite(NMOS_2, LOW);
+    
 
 }
