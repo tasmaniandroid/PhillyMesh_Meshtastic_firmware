@@ -22,7 +22,9 @@ int32_t GenericThreadModule::runOnce()
         firstTime = 0;
         LOG_INFO("first time GenericThread running");
     }
+    LOG_INFO("GenericThread executing PhillyMesh MicroNode");
+    digitalWrite(NMOS_2, digitalRead(EXT_CHRG_DETECT));  // Match charge state
+    LOG_INFO("NMOS_2 is %d and EXT_CHRG_DETECT is %d", !digitalRead(NMOS_2),digitalRead(EXT_CHRG_DETECT));
 
-    LOG_INFO("GenericThread executing");
     return (my_interval);
 }
