@@ -74,7 +74,9 @@
 #if !MESHTASTIC_EXCLUDE_GENERIC_THREAD_MODULE
 #include "modules/GenericThreadModule.h"
 #endif
-
+#if !MESHTASTIC_EXCLUDE_SOLAR_LIGHT_MODULE
+#include "modules/SolarLightModule.h"
+#endif
 #ifdef ARCH_ESP32
 #if defined(USE_SX1280) && !MESHTASTIC_EXCLUDE_AUDIO
 #include "modules/esp32/AudioModule.h"
@@ -176,6 +178,9 @@ void setupModules()
 #endif
 #if !MESHTASTIC_EXCLUDE_GENERIC_THREAD_MODULE
     new GenericThreadModule();
+#endif
+#if !MESHTASTIC_EXCLUDE_SOLAR_LIGHT_MODULE
+    new SolarLightModule();
 #endif
     // Note: if the rest of meshtastic doesn't need to explicitly use your module, you do not need to assign the instance
     // to a global variable.
