@@ -26,32 +26,60 @@ int32_t SolarLightModule::runOnce()
     else
     {
         LOG_INFO("SolarLight executing PhillyMesh MicroNode");
-        charging_state = digitalRead(EXT_CHRG_DETECT);
-        if (charging_state != previous_charging_state || lowbat_state != previous_lowbat_state)
+        //digitalWrite(NMOS_2, digitalRead(EXT_CHRG_DETECT));  // Match charge state
+        bool Not_Charging = digitalRead(EXT_CHRG_DETECT);
+        if (Not_Charging != previous_state && !ramping)
         {
-            previous_charging_state = charging_state;
-            previous_lowbat_state = lowbat_state;
-            if (charging_state && !lowbat_state)
+            previous_state = Not_Charging;
+            if (Not_Charging)
             {
-                     pwm_value = 50; // roughly 20% brightness
+                ramp_target_value = 50; // fade up
             }
             else
             {
-                pwm_value = 0; // off
+                ramp_target_value = 0; //fade down
             }
-        stall_for_time = true;
-        LOG_INFO("Setting PWM target of %d", pwm_value);
-        analogWrite(NMOS_2,pwm_value);
+        start_ramp = true;
+        LOG_INFO("Initiating Ramp with target of %d", ramp_target_value);
 
         }
 
+        if (ramping || start_ramp)
+        {  
+            start_ramp = 0;
+            if (ramp_target_value == ramp_value)
+            {
+                ramping = 0;
+                LOG_INFO("Ending Ramp");
+                stall_for_time = 1;
+            }
+            else
+            {
+                ramping = 1;
+                if (ramp_target_value < ramp_value)
+                ramp_value = ramp_value - 1;
+                if (ramp_target_value > ramp_value)
+                ramp_value = ramp_value + 1;
+                LOG_INFO("ramp value is %d",ramp_value);
+            }
+            
+            analogWrite(NMOS_2,ramp_value);
+            
+        }
+
+
     }
-    if (stall_for_time)
+    if (ramping)
     {
-        LOG_INFO("Delaying state changes");
+        LOG_INFO("tenh of second");
+        return (100);  
+    }
+    else if (stall_for_time)
+    {
+        LOG_INFO("ten seconds");
 
         stall_for_time = false;
-        return (stall_interval);
+        return (10000);
     }
     else
     {
