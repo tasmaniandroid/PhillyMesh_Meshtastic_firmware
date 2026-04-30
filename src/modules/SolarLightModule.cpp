@@ -13,8 +13,7 @@ SolarLightModule::SolarLightModule() : concurrency::OSThread("SolarLightModule")
 int32_t SolarLightModule::runOnce()
 {
 
-    bool enabled = true;
-    if (!enabled)
+    if (!moduleConfig.solar_light.enabled)
         return disable();
 
     if (firstTime) {
