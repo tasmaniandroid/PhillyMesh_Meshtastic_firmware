@@ -170,27 +170,10 @@ static const uint8_t MOSI = PIN_SPI_MOSI;
 static const uint8_t MISO = PIN_SPI_MISO;
 static const uint8_t SCK = PIN_SPI_SCK;
 
-/*
- * GPS
- */
-// GPS L76K
 
-// Default GPS L76K
+#define PIN_SERIAL1_TX 30
+#define PIN_SERIAL1_RX 31
 
-#define GPS_L76K
-#define GPS_TX_PIN D6 // This is data from the MCU
-#define GPS_RX_PIN D7 // This is data from the GNSS module
-
-#define PIN_GPS_STANDBY D0 // this is where the conflicting pinouts come from
-
-// I2C and BLE-Legacy put them on the NFC pins
-
-
-#define HAS_GPS 1
-#define GPS_BAUDRATE 9600
-#define GPS_THREAD_INTERVAL 50
-#define PIN_SERIAL1_TX GPS_TX_PIN
-#define PIN_SERIAL1_RX GPS_RX_PIN
 
 /*
  * Battery
