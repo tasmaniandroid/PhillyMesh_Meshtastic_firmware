@@ -320,7 +320,9 @@ typedef enum _meshtastic_HardwareModel {
     /* ------------------------------------------------------------------------------------------------------------------------------------------
  Reserved ID For developing private Ports. These will show up in live traffic sparsely, so we can use a high number. Keep it within 8 bits.
  ------------------------------------------------------------------------------------------------------------------------------------------ */
-    meshtastic_HardwareModel_PRIVATE_HW = 255
+    meshtastic_HardwareModel_PRIVATE_HW = 255,
+    /* PhillyMesh.net MicroNode */
+    meshtastic_HardwareModel_PHILLYMESH_MICRONODE = 267
 } meshtastic_HardwareModel;
 
 /* Shared constants between device and phone */
@@ -1403,8 +1405,8 @@ extern "C" {
 
 /* Helper constants for enums */
 #define _meshtastic_HardwareModel_MIN meshtastic_HardwareModel_UNSET
-#define _meshtastic_HardwareModel_MAX meshtastic_HardwareModel_PRIVATE_HW
-#define _meshtastic_HardwareModel_ARRAYSIZE ((meshtastic_HardwareModel)(meshtastic_HardwareModel_PRIVATE_HW+1))
+#define _meshtastic_HardwareModel_MAX meshtastic_HardwareModel_PHILLYMESH_MICRONODE
+#define _meshtastic_HardwareModel_ARRAYSIZE ((meshtastic_HardwareModel)(meshtastic_HardwareModel_PHILLYMESH_MICRONODE+1))
 
 #define _meshtastic_Constants_MIN meshtastic_Constants_ZERO
 #define _meshtastic_Constants_MAX meshtastic_Constants_DATA_PAYLOAD_LEN
