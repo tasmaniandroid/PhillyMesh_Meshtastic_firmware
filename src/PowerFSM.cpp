@@ -96,8 +96,13 @@ static void sdsEnter()
 
 static void lowBattSDSEnter()
 {
-    LOG_POWERFSM("State: Lower batt SDS");
-    doDeepSleep(Default::getConfiguredOrDefaultMs(config.power.sds_secs), false, true);
+    #if defined(PHILLYMESH_MICRONODE)
+        LOG_POWERFSM("State: Lower batt SDS -- intercepted, only sleep for 2 seconds, save nodedb.");
+        doDeepSleep(2000, false, false);
+    #else
+        LOG_POWERFSM("State: Lower batt SDS");
+        doDeepSleep(Default::getConfiguredOrDefaultMs(config.power.sds_secs), false, true);
+    #endif
 }
 extern Power *power;
 
